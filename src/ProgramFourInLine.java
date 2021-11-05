@@ -11,28 +11,33 @@ public class ProgramFourInLine {
 		String secondPlayer = board.secondPlayer(firstPlayer);
 		String currentPlayer = secondPlayer;
 		int totalPieces = 42;
-		// game
-		int row = 0;
+		// game instructions
+		int column = 0;
 		System.out.println("You can start! To finish press -1");
 		boolean exit = false;
 		
-			while (!exit && row != -1 && totalPieces > 0) {
+		    //start the game
+			while (!exit && column != -1 && totalPieces > 0) {
 				try {
 				System.out.println(
 						"Choose a column: player" + board.currentPlayer(firstPlayer, secondPlayer, currentPlayer));
-				row = sc.nextInt();
-				while ((row >= board.getBoard().length || row < 0 || board.isThereAPiece(row)) && row != -1) {
-					if (board.isThereAPiece(row)) {
+				column = sc.nextInt();
+			
+				//if is an incompatible column to put the piece
+				
+				while ((column >= board.getBoard().length || column < 0 || board.isThereAPiece(column)) && column != -1) {
+					if (board.isThereAPiece(column)) {
 						System.out.println("There is a piece, choose other column");
-						row = sc.nextInt();
+						column = sc.nextInt();
 					} else {
-						System.out.println("Choose a row between 0 and 5");
-						row = sc.nextInt();
+						System.out.println("Choose a column between 0 and 5");
+						column = sc.nextInt();
 					}
 				}
-
-				if (row != -1 && !board.isThereAPiece(row)) {
-					Position position = new Position(board.lineFree(row), row);
+				
+                //continue the game
+				if (column != -1 && !board.isThereAPiece(column)) {
+					Position position = new Position(board.lineFree(column), column);
 					Piece piece = new Piece(board.currentPlayer(firstPlayer, secondPlayer, currentPlayer), position);
 					board.addPieces(piece);
 					totalPieces--;
@@ -48,7 +53,7 @@ public class ProgramFourInLine {
 			}
 
 			// result of the game
-			if (row != -1)
+			if (column != -1)
 				System.out.println("You won " + currentPlayer);
 			else if(totalPieces==0) {
 				System.out.println("Its a draw! ");
