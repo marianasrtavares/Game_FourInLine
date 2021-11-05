@@ -31,15 +31,18 @@ public class Board {
 
 	}
 
-	public int lineFree(int row) {
+	public int lineFree(int column) {
 		int rowFree = board[0].length;
 		for (int line = 0; line < board.length; line++) {
-			if (board[line][row] != null) {
+			if (board[line][column] != null) {
 				rowFree--;
 			}
 
 		}
 		return rowFree;
+	}
+	public boolean isThereAPiece(int column) {
+		return (board[0][column]!=null) ? true:false;		
 	}
 
 	public void printBoard() {
